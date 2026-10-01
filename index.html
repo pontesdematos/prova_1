@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Simulado — Prova 1 — Sistemas Digitais II</title><style>
+:root{--bg:#f3f5f7;--card:#fff;--ink:#202124;--muted:#5f6368;--line:#d8dde3;--accent:#26343f;--good:#176b3a;--bad:#a52d2d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Arial,sans-serif}
+main{max-width:900px;margin:auto;padding:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 2px 10px #0001}
+h1{font-size:28px;margin:0 0 5px}h2{font-size:21px;margin-top:26px}h3{font-size:17px;margin-top:20px}
+.muted{color:var(--muted)}.box{background:#fafafa;border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0}th,td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}th{background:#eef0f2}
+.bar{height:8px;background:#ddd;border-radius:9px;overflow:hidden}.fill{height:100%;width:0;background:var(--accent);transition:.2s}
+.option{display:block;width:100%;text-align:left;background:white;border:1px solid #c7ccd1;border-radius:10px;padding:12px;margin:8px 0;font-size:15px;cursor:pointer}
+.option:hover{background:#f1f3f4}.option.correct{background:#e8f6ed;border-color:var(--good)}.option.wrong{background:#fdeaea;border-color:var(--bad)}
+.feedback{margin-top:12px;padding:12px;border-radius:10px;background:#f1f3f5}
+.btn{background:var(--accent);color:white;border:0;border-radius:10px;padding:12px 18px;font-size:15px;cursor:pointer;margin-top:12px}.btn:disabled{opacity:.45;cursor:default}
+.small{font-size:14px;color:var(--muted)}
+@media(max-width:600px){main{padding:8px}.card{padding:16px}}
+</style></head>
+<body><main><div class="card">
+<h1>📝 Simulado — Prova 1</h1>
+<p class="muted">Sistemas Digitais II — baseado na Primeira lista de exercícios enviada.</p>
+<div class="box"><b>Como usar:</b> primeiro revise o material de apoio. Depois responda às 20 questões. Cada questão tem uma única alternativa correta e a explicação aparece após a resposta.</div>
+
+<h2>📘 Material de apoio</h2>
+<p>Este material foi montado <b>diretamente a partir da Primeira lista de exercícios de Sistemas Digitais II</b> enviada. A ideia é revisar os conceitos e relações necessários para atacar questões do mesmo tipo.</p>
+
+<h3>1. Estrutura de um sistema computacional</h3>
+<ul>
+<li><b>Processador (CPU):</b> executa instruções e realiza operações.</li>
+<li><b>Memória:</b> armazena instruções e dados.</li>
+<li><b>Entrada e saída (I/O):</b> permite comunicação com dispositivos externos.</li>
+<li><b>Interconexão:</b> permite a comunicação entre os componentes.</li>
+</ul>
+
+<h3>2. Modelo de von Neumann</h3>
+<p>A característica central é o conceito de <b>programa armazenado</b>: instruções e dados podem ficar armazenados na mesma memória, sendo buscados pelo processador.</p>
+
+<h3>3. Lei de Amdahl</h3>
+<p>A Lei de Amdahl limita o ganho de desempenho de uma melhoria porque a parte do programa que <b>não é beneficiada</b> pela melhoria continua limitando o desempenho total.</p>
+<div class="box"><b>Forma clássica:</b> speedup = 1 / ((1 − f) + f/s), em que <b>f</b> é a fração beneficiada e <b>s</b> é o ganho nessa parte.</div>
+<p>Se 25% do programa é obrigatoriamente sequencial, mesmo com paralelismo ilimitado o ganho máximo é <b>1/0,25 = 4 vezes</b>.</p>
+
+<h3>4. Ciclo básico do processador</h3>
+<p>Uma visão geral é: <b>busca (fetch) → decodificação → execução</b>. Durante a busca, a instrução é obtida da memória; na decodificação, seu significado e operandos são identificados; na execução, a operação é realizada.</p>
+
+<h3>5. CISC × RISC</h3>
+<table><tr><th>CISC</th><th>RISC</th></tr>
+<tr><td>Conjunto de instruções mais complexo e variado.</td><td>Conjunto de instruções mais simples e regular.</td></tr>
+<tr><td>Instruções podem ter formatos mais variados.</td><td>Busca maior regularidade de formatos e execução.</td></tr>
+<tr><td>Pode realizar operações complexas em uma instrução.</td><td>Favorece operações simples e composição por várias instruções.</td></tr></table>
+
+<h3>6. Desempenho: frequência, CPI e instruções</h3>
+<p>Uma relação fundamental é:</p>
+<div class="box"><b>Tempo de CPU = IC × CPI / frequência</b></div>
+<p>Também:</p>
+<ul>
+<li><b>Instruções por segundo ≈ frequência / CPI</b>;</li>
+<li><b>Número de ciclos = frequência × tempo</b>;</li>
+<li><b>IC = ciclos / CPI</b>.</li>
+</ul>
+<p>Por isso, uma frequência maior não garante sozinha um processador mais rápido: o CPI também importa.</p>
+
+<h3>7. Formato de instrução e campos em bits</h3>
+<p>Se um campo possui <b>n bits</b>, ele pode representar <b>2ⁿ combinações</b>. Assim, um campo de 4 bits permite 16 registradores diferentes; um opcode de 9 bits permite 512 códigos de instrução.</p>
+<p>Para um imediato/deslocamento de 15 bits <b>com sinal em complemento de dois</b>, a faixa é <b>−2¹⁴ a 2¹⁴−1</b>, isto é, −16384 a 16383.</p>
+
+<h3>8. Escolha de uma melhoria — Amdahl na prática</h3>
+<p>Quando apenas uma parcela do tempo é afetada por uma atualização, divida a parcela afetada pelo fator de melhoria e mantenha as demais parcelas. Compare os novos tempos totais.</p>
+<p>No exercício da lista, memória ocupa 50% do tempo e fica 20% mais rápida; CPU ocupa 30% e fica 30% mais rápida. A comparação deve ser feita sobre o <b>tempo total</b>, não apenas sobre a velocidade do componente.</p>
+
+<h3>9. CPI médio</h3>
+<p>Quando um programa tem classes diferentes de instruções:</p>
+<div class="box"><b>CPI médio = Σ (fração da classe × CPI da classe)</b></div>
+<p>Depois:</p>
+<div class="box"><b>ciclos = número de instruções × CPI médio</b><br><b>tempo = ciclos / frequência</b></div>
+
+<h3>10. Unidade de controle</h3>
+<p>Em uma memória de controle, a quantidade de posições depende dos bits usados para formar o endereço da memória de controle; a largura de cada posição depende da quantidade de sinais de controle armazenados.</p>
+<p>Se há 9 estados possíveis, são necessários pelo menos <b>4 bits</b> para codificá-los (porque 2³=8 e 2⁴=16). Com opcode de 8 bits, uma organização possível usa 12 bits de endereço e 12 bits de dados: <b>4096 × 12 bits</b>.</p>
+
+<h3>11. Mapa de memória</h3>
+<p>Um espaço de endereços de 64 KB possui <b>65536 endereços</b>, normalmente representados por 16 bits de endereço.</p>
+<table><tr><th>Faixa</th><th>Uso</th><th>Tamanho</th></tr>
+<tr><td>0–2047</td><td>ROM</td><td>2 KB</td></tr>
+<tr><td>2048–32767</td><td>RAM</td><td>30 KB</td></tr>
+<tr><td>32768–63487</td><td>Sem uso</td><td>30 KB</td></tr>
+<tr><td>63488–65535</td><td>I/O</td><td>2 KB</td></tr></table>
+
+<h3>12. RAMSES: modos de endereçamento</h3>
+<p>Na rotina fornecida, aparecem instruções como <b>LDR</b>, <b>ADD</b>, <b>SUB</b> e <b>STR</b>. O exercício também usa endereçamento indireto/indexado, como <b>LDR X 134,I</b> e <b>ADD X 112,X</b>.</p>
+<p>Para resolver uma rotina, acompanhe passo a passo o valor dos registradores e consulte a memória sempre que uma instrução precisar de um operando armazenado nela.</p>
+
+<h3>13. Acessos à memória</h3>
+<p>Separe <b>acesso à memória de instruções</b> (busca das instruções) de <b>acesso à memória de dados</b> (leitura/escrita dos operandos). Uma instrução pode exigir mais de um acesso a dados quando utiliza indireção.</p>
+
+<h3>14. Programas RAMSES</h3>
+<p>Para multiplicar dois valores sem uma instrução de multiplicação, uma estratégia possível é <b>repetir somas</b>: inicializar um acumulador com zero, somar o multiplicando enquanto um contador não chegar a zero e armazenar o resultado.</p>
+<p>Para contar valores em um intervalo de endereços, use um ponteiro para percorrer as posições, teste cada conteúdo e incremente um contador quando a condição for satisfeita.</p>
+
+<h3>15. RTL e ULA</h3>
+<p>RTL (Register Transfer Language) descreve microoperações como transferências entre registradores, leituras/escritas de memória, incremento do contador de programa e operações na ULA.</p>
+<p>Uma ULA baseada em <b>ALU slices</b> pode ser construída repetindo fatias de bits, com sinais de carry propagados de uma fatia para a seguinte.</p>
+
+<div class="box">
+<b>🧠 Fórmulas para memorizar</b>
+<ul>
+<li>Instruções/s = frequência / CPI</li>
+<li>Ciclos = frequência × tempo</li>
+<li>IC = ciclos / CPI</li>
+<li>CPI médio = Σ(fração × CPI)</li>
+<li>Speedup de Amdahl = 1 / ((1−f)+f/s)</li>
+<li>2ⁿ combinações para um campo de n bits</li>
+</ul>
+</div>
+
+<hr style="border:0;border-top:1px solid #ddd;margin:30px 0">
+<h2>📝 Simulado — 20 questões</h2>
+<p class="muted">As questões foram convertidas/adaptadas a partir dos temas e exercícios da lista, incluindo desempenho de processadores, Lei de Amdahl, formato de instruções, unidade de controle, mapa de memória e RAMSES.</p>
+<div class="bar"><div id="fill" class="fill"></div></div><p id="status" class="small"></p>
+<div id="card"></div><button id="next" class="btn" disabled>Próxima</button><button id="restart" class="btn" style="display:none">Refazer simulado</button>
+</div></main><script>
+const qs=[["Qual é a inovação central associada ao modelo de von Neumann?", ["Uso obrigatório de três CPUs", "Eliminação da memória principal", "Execução sem instruções", "Programa armazenado na memória junto aos dados"], 3, "O modelo de von Neumann é associado ao conceito de programa armazenado, com instruções e dados na memória."], ["Segundo a Lei de Amdahl, um trecho que não pode ser acelerado por uma melhoria...", ["deixa de influenciar o tempo total", "continua limitando o ganho total", "é automaticamente paralelizado", "faz o speedup ser infinito"], 1, "A parcela não beneficiada permanece como limitante do ganho global."], ["Um programa tem 25% de seu tempo em código sequencial. Considerando paralelismo ilimitado para os outros 75%, qual o maior speedup?", ["3×", "4×", "5×", "2×"], 1, "O limite é 1/0,25 = 4."], ["Qual sequência representa, de forma simplificada, o ciclo básico de operação do processador?", ["Armazenamento → impressão → execução", "Execução → busca → formatação", "Busca → decodificação → execução", "Decodificação → impressão → busca"], 2, "A visão básica é buscar a instrução, decodificá-la e executá-la."], ["Qual afirmação caracteriza melhor a diferença entre RISC e CISC?", ["RISC tende a usar conjunto de instruções mais simples e regular", "CISC não possui instruções", "RISC elimina registradores", "CISC não pode acessar memória"], 0, "RISC busca maior simplicidade e regularidade do conjunto de instruções; CISC admite maior complexidade."], ["A relação tempo de CPU = IC × CPI / frequência mostra que o desempenho depende...", ["somente da capacidade da memória", "somente da frequência", "somente do número de instruções", "de instruções, CPI e frequência"], 3, "O tempo depende dos três fatores da expressão."], ["Um processador opera a 3 GHz e tem CPI 1,5. Aproximadamente quantas instruções por segundo ele executa?", ["1,5 bilhão", "2 bilhões", "4,5 bilhões", "0,5 bilhão"], 1, "3 GHz / 1,5 = 2 bilhões de instruções por segundo."], ["No formato 9 | 4 | 4 | 15 bits, quantos registradores podem ser identificados por um campo Reg de 4 bits?", ["32", "4", "8", "16"], 3, "Com 4 bits existem 2⁴ = 16 combinações."], ["No mesmo formato, um opcode de 9 bits permite quantos códigos distintos?", ["4096", "256", "512", "1024"], 2, "2⁹ = 512 combinações."], ["Assumindo que o campo de 15 bits de imediato/deslocamento seja inteiro com sinal em complemento de dois, qual é sua faixa?", ["−16384 a 16383", "0 a 32767", "−8192 a 8191", "−32768 a 32767"], 0, "Com 15 bits com sinal, a faixa é −2¹⁴ até 2¹⁴−1: −16384 a 16383."], ["Uma aplicação leva 12 s: 30% CPU, 50% memória e 20% I/O. Se a memória ficar 20% mais rápida, qual novo tempo aproximado?", ["11 s", "11,8 s", "8 s", "10 s"], 0, "A parcela de memória passa de 6 s para 6/1,2 = 5 s; total = 3,6 + 5 + 2,4 = 11 s."], ["No mesmo problema, se apenas a CPU ficar 30% mais rápida, qual novo tempo aproximado?", ["12,6 s", "8,4 s", "10,2 s", "11,17 s"], 3, "A CPU passa de 3,6 s para 3,6/1,3 ≈ 2,769 s; somando 6 + 2,4, resulta ≈ 11,169 s."], ["Para um programa com classes de instruções diferentes, como se calcula o CPI médio?", ["Escolhendo o maior CPI", "Dividindo frequência por tempo", "Somando os CPIs sem pesos", "Fazendo a média ponderada pelas frações de cada classe"], 3, "CPI médio é a soma de fração da classe × CPI da classe."], ["Na Questão 12, implementação A/P1 tem CPIs 1, 2, 3 e 3, com frações 10%, 20%, 50% e 20%. Qual o CPI médio?", ["1,7", "2,0", "2,6", "3,0"], 2, "0,1×1 + 0,2×2 + 0,5×3 + 0,2×3 = 2,6."], ["Para 1 milhão de instruções e CPI médio 2,6, quantos ciclos são necessários?", ["2,6 milhões", "26 milhões", "260 mil", "1,3 milhão"], 0, "Ciclos = IC × CPI = 1.000.000 × 2,6 = 2.600.000."], ["Uma arquitetura possui 8 bits de opcode e precisa representar até 9 estados. Quantos bits são necessários para codificar os estados?", ["4", "8", "2", "3"], 0, "3 bits representam apenas 8 combinações; são necessários 4 bits para chegar a 16 combinações."], ["Em um espaço de endereços de 64 KB, quantos bits são necessários para representar os endereços?", ["12", "16", "64", "8"], 1, "64 KB = 2¹⁶ posições de byte, portanto são necessários 16 bits de endereço."], ["Na rotina RAMSES fornecida, após LDR A 128, LDR B 131 e LDR X 134,I, considerando a tabela da lista, quais são os valores iniciais de A, B e X?", ["A=20, B=6, X=10", "A=10, B=6, X=20", "A=6, B=10, X=25", "A=10, B=25, X=6"], 1, "A recebe memória[128]=10; B recebe memória[131]=6; X usa indireção em 134, que aponta para 130, onde está 20."], ["Na mesma rotina RAMSES, após todas as instruções mostradas, quais valores finais dos registradores A, B e X?", ["A=20, B=5, X=45", "A=30, B=6, X=40", "A=20, B=6, X=45", "A=10, B=5, X=25"], 0, "A=20; X=20+mem[112+20]=20+25=45; B=6−mem[129]=5 e depois B=5+mem[84+45]=5+mem[129]=6."], ["Na rotina RAMSES, por que LDR X 134,I pode exigir uma leitura adicional de memória em relação a um acesso direto?", ["Porque o registrador X é sempre zerado", "Porque a indireção usa o conteúdo de 134 como endereço de outro dado", "Porque LDR nunca acessa memória", "Porque o opcode precisa ser multiplicado"], 1, "Na indireção, primeiro se obtém o endereço armazenado na posição indicada e depois se acessa o dado nesse endereço."]];
+let i=0,score=0,answered=false;
+const card=document.querySelector('#card'),next=document.querySelector('#next'),restart=document.querySelector('#restart'),status=document.querySelector('#status'),fill=document.querySelector('#fill');
+function render(){
+ answered=false; next.disabled=true; next.textContent='Próxima';
+ status.textContent=`Questão ${i+1} de ${qs.length}`;
+ fill.style.width=(i/qs.length*100)+'%';
+ const [q,opts,ans,exp]=qs[i];
+ card.innerHTML=`<h2>${i+1}. ${q}</h2><div id="opts"></div><div id="fb" class="feedback" style="display:none"></div>`;
+ opts.forEach((x,k)=>{const b=document.createElement('button');b.className='option';b.textContent=String.fromCharCode(65+k)+') '+x;b.onclick=()=>answer(k);document.querySelector('#opts').appendChild(b)});
+}
+function answer(k){
+ if(answered)return; answered=true;
+ const [q,opts,ans,exp]=qs[i];
+ const bs=[...document.querySelectorAll('.option')]; bs.forEach(b=>b.disabled=true);
+ bs[ans].classList.add('correct'); const ok=k===ans; if(ok)score++; else bs[k].classList.add('wrong');
+ const fb=document.querySelector('#fb');fb.style.display='block';fb.innerHTML=(ok?'<b>✓ Correto!</b> ':'<b>✗ Incorreto.</b> ')+exp;
+ next.disabled=false;if(i===qs.length-1)next.textContent='Ver resultado';
+}
+next.onclick=()=>{if(i<qs.length-1){i++;render()}else finish()};
+function finish(){
+ fill.style.width='100%';status.textContent='Simulado concluído';
+ const p=Math.round(score/qs.length*100);
+ card.innerHTML=`<h2>📊 Resultado final</h2><p style="font-size:21px"><b>${score} / ${qs.length}</b> — ${p}%</p>
+ <p>${p>=85?'Ótimo resultado.':p>=70?'Bom resultado.':p>=50?'Revise os pontos em que teve dificuldade.':'Releia o material de apoio e tente novamente.'}</p>`;
+ next.style.display='none';restart.style.display='inline-block';
+}
+restart.onclick=()=>{i=0;score=0;next.style.display='inline-block';restart.style.display='none';render()};
+render();
+</script></body></html>
